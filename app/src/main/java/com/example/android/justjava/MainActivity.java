@@ -13,6 +13,7 @@ import java.util.Locale;
  */
 public class MainActivity extends ActionBarActivity {
 
+    int quantity=2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,19 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int quantity=5;
+
+        display(quantity);
+        displayPrice(quantity * 5);
+    }
+
+    public void increment(View view) {
+        quantity=quantity+1;
+        display(quantity);
+        displayPrice(quantity*5);
+    }
+
+    public void decrement(View view) {
+        quantity=quantity-1;
         display(quantity);
         displayPrice(quantity*5);
     }
