@@ -25,25 +25,26 @@ public class MainActivity extends ActionBarActivity {
      */
     public void submitOrder(View view) {
         String priceMessage = "Total = $";
-        displayMessage(priceMessage+quantity*5);
+        int price = calculatePrice();
+        displayMessage(createOrderSummary(price));
     }
 
     public void increment(View view) {
         quantity=quantity+1;
-        display(quantity);
+        displayQuantity(quantity);
 
     }
 
     public void decrement(View view) {
         quantity=quantity-1;
-        display(quantity);
+        displayQuantity(quantity);
 
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
@@ -62,7 +63,27 @@ public class MainActivity extends ActionBarActivity {
      */
     private void displayMessage(String message) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        message= message+"\n Thank You!";
         priceTextView.setText(message);
+    }
+
+    /**
+     * Calculates the price of the order.
+     *
+     */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
+    }
+
+    /*
+    * Return a message with all the information of the order
+    * @param price is the price of a cup of coffee
+    * */
+    private String createOrderSummary(int price){
+        String message = "Name: Uriel Carrillo \n";
+        message+="Quantity: "+quantity+"\n";
+        message+="Total: $"+price+"\n";
+        message+="Thank You!";
+        return  message;
     }
 }
