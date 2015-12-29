@@ -3,6 +3,7 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -14,6 +15,8 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity {
 
     int quantity=2;
+    boolean hasWhippedCream=false;
+    boolean hasChocolate=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +29,8 @@ public class MainActivity extends ActionBarActivity {
     public void submitOrder(View view) {
         String priceMessage = "Total = $";
         int price = calculatePrice();
+        hasWhippedCream= CheckForWhippedCream();
+        hasChocolate=CheckForChocolate();
         displayMessage(createOrderSummary(price));
     }
 
@@ -69,12 +74,28 @@ public class MainActivity extends ActionBarActivity {
         return price;
     }
 
+    private boolean CheckForWhippedCream()
+    {
+        CheckBox checkBox = (CheckBox) findViewById(R.id.hasWhippedCream);
+        boolean isChecked = checkBox.isChecked();
+        return isChecked;
+    }
+
+    private boolean CheckForChocolate()
+    {
+        CheckBox checkBox = (CheckBox) findViewById(R.id.hasChocolate);
+        boolean isChecked = checkBox.isChecked();
+        return isChecked;
+    }
+
     /*
     * Return a message with all the information of the order
     * @param price is the price of a cup of coffee
     * */
     private String createOrderSummary(int price){
         String message = "Name: Uriel Carrillo \n";
+        message+="Add whipped cream? : "+hasWhippedCream+"\n";
+        message+="Add chocolate? : "+hasChocolate+"\n";
         message+="Quantity: "+quantity+"\n";
         message+="Total: $"+price+"\n";
         message+="Thank You!";
