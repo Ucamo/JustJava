@@ -2,8 +2,10 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
@@ -17,6 +19,7 @@ public class MainActivity extends ActionBarActivity {
     int quantity=2;
     boolean hasWhippedCream=false;
     boolean hasChocolate=false;
+    String customerName="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +31,10 @@ public class MainActivity extends ActionBarActivity {
      */
     public void submitOrder(View view) {
         String priceMessage = "Total = $";
-        int price = calculatePrice();
         hasWhippedCream= CheckForWhippedCream();
         hasChocolate=CheckForChocolate();
+        customerName=getCustomerName();
+        int price = calculatePrice();
         displayMessage(createOrderSummary(price));
     }
 
@@ -70,7 +74,16 @@ public class MainActivity extends ActionBarActivity {
      *
      */
     private int calculatePrice() {
-        int price = quantity * 5;
+        int price = 0;
+        int topping=0;
+        if(hasChocolate){
+            topping+=2;
+        }
+        if(hasWhippedCream){
+            topping+=1;
+        }
+        price= (quantity*(5+topping));
+
         return price;
     }
 
@@ -88,12 +101,19 @@ public class MainActivity extends ActionBarActivity {
         return isChecked;
     }
 
+    private String getCustomerName()
+    {
+        EditText txtCustomerName = (EditText)findViewById(R.id.txtCustomerName);
+        String name = txtCustomerName.getText().toString();
+        return name;
+    }
+
     /*
     * Return a message with all the information of the order
     * @param price is the price of a cup of coffee
     * */
     private String createOrderSummary(int price){
-        String message = "Name: Uriel Carrillo \n";
+        String message = "Name: "+customerName+" \n";
         message+="Add whipped cream? : "+hasWhippedCream+"\n";
         message+="Add chocolate? : "+hasChocolate+"\n";
         message+="Quantity: "+quantity+"\n";
