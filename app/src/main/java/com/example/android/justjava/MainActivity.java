@@ -1,6 +1,8 @@
 package com.example.android.justjava;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -37,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
         hasChocolate=CheckForChocolate();
         customerName=getCustomerName();
         int price = calculatePrice();
-        displayMessage(createOrderSummary(price));
+        createOrderSummary(price);
     }
 
     public void increment(View view) {
@@ -82,13 +84,6 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
-    }
 
     /**
      * Calculates the price of the order.
@@ -133,13 +128,23 @@ public class MainActivity extends ActionBarActivity {
     * Return a message with all the information of the order
     * @param price is the price of a cup of coffee
     * */
-    private String createOrderSummary(int price){
+    private void createOrderSummary(int price){
         String message = "Name: "+customerName+" \n";
         message+="Add whipped cream? : "+hasWhippedCream+"\n";
         message+="Add chocolate? : "+hasChocolate+"\n";
         message+="Quantity: "+quantity+"\n";
         message+="Total: $"+price+"\n";
         message+="Thank You!";
-        return  message;
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        String[] addresses = new String[1];
+        addresses[0]="theemailofthecompany@gmail.com";
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Order from Just Java");
+        intent.putExtra(Intent.EXTRA_TEXT,message);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
