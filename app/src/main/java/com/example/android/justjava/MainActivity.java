@@ -1,5 +1,6 @@
 package com.example.android.justjava;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -39,14 +41,33 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void increment(View view) {
-        quantity=quantity+1;
-        displayQuantity(quantity);
+        if(quantity>=100) {
+            ShowMessage("You can't order more than 100 Cups of Coffee");
+            return;
+        }
+        else{
+            quantity = quantity + 1;
+            displayQuantity(quantity);
+        }
+    }
 
+    public void ShowMessage(String messageText)
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context,messageText,duration);
+        toast.show();
     }
 
     public void decrement(View view) {
-        quantity=quantity-1;
-        displayQuantity(quantity);
+        if(quantity<=1) {
+            ShowMessage("You can't order less than 1 Cup of Coffee");
+            return;
+        }
+        else {
+            quantity = quantity - 1;
+            displayQuantity(quantity);
+        }
 
     }
 
