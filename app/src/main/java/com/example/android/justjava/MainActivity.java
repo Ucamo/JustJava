@@ -81,10 +81,6 @@ public class MainActivity extends ActionBarActivity {
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
-
-
-
-
     /**
      * Calculates the price of the order.
      *
