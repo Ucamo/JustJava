@@ -129,19 +129,19 @@ public class MainActivity extends ActionBarActivity {
     * @param price is the price of a cup of coffee
     * */
     private void createOrderSummary(int price){
-        String message = "Name: "+customerName+" \n";
-        message+="Add whipped cream? : "+hasWhippedCream+"\n";
-        message+="Add chocolate? : "+hasChocolate+"\n";
-        message+="Quantity: "+quantity+"\n";
-        message+="Total: $"+price+"\n";
-        message+="Thank You!";
+        String message = getString(R.string.name)+" "+customerName+" \n";
+        message+=getString(R.string.order_summary_whipped_cream)+" : "+hasWhippedCream+"\n";
+        message+=getString(R.string.order_summary_chocolate)+" : "+hasChocolate+"\n";
+        message+=getString(R.string.order_summary_quantity)+" : "+quantity+"\n";
+        message+=getString(R.string.order_summary_price)+": "+price+"\n";
+        message+=getString(R.string.thank_you);
 
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         String[] addresses = new String[1];
         addresses[0]="theemailofthecompany@gmail.com";
         intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Order from Just Java");
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.order_summary_email_subject)+ " "+customerName);
         intent.putExtra(Intent.EXTRA_TEXT,message);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);

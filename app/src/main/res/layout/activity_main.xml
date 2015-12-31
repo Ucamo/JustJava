@@ -20,12 +20,12 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="@string/name"
                     android:id="@+id/txtCustomerName"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toppings"
+            android:text="@string/toppings"
             android:layout_marginTop="16dp"
             android:textAllCaps="true"/>
 
@@ -42,7 +42,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Whipped cream"    />
+                android:text="@string/whipped_cream"    />
         </LinearLayout>
 
                 <LinearLayout
@@ -58,14 +58,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Chocolate"    />
+                        android:text="@string/chocolate"    />
                 </LinearLayout>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quantity"
+            android:text="@string/quantity"
             android:layout_marginTop="16dp"
             android:textAllCaps="true"/>
 
@@ -104,7 +104,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order"
+            android:text="@string/order"
             android:textAllCaps="true"
             android:onClick="submitOrder"/>
 
